@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -19,10 +18,7 @@ void	ft_bzero(void *s, size_t n)
 
 	str = (unsigned char *)s;
 	while (n-- > 0)
-	{
-		*str = 0;
-		str++;
-	}
+		*str++ = 0;
 }
 /*
 int	main(void)

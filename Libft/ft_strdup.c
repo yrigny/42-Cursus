@@ -1,34 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 17:56:27 by yrigny            #+#    #+#             */
-/*   Updated: 2023/11/06 17:56:29 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/10 17:05:20 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/10 17:05:23 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+char	*ft_strdup(const char *s)
 {
-	if ((c >= 48 && c <= 57) || (c > 64 && c < 91) || (c > 96 && c < 123))
-		return (1);
-	return (0);
+	size_t	len;
+	char	*dup;
+
+	len = 0;
+	while (s[len])
+		len++;
+	dup = (char *)malloc(sizeof(char) *(len + 1));
+	if (!dup)
+		return (0);
+	return (ft_memcpy(dup, s, len + 1));
 }
 /*
 int	main(void)
 {
-	int c = '?';
-	if (isalnum(c))
-		printf("isalnum result: is alnum\n");
+	char	*src;
+	char	*dup;
+
+	src = "";
+	dup = ft_strdup(src);
+	if (dup == 0)
+	{
+		printf("duplication failed\n");
+		free(dup);
+		return (1);
+	}
 	else
-		printf("isalnum result: is not alnum\n");
-	if (ft_isalnum(c))
-		printf("ft_isalnum result: is alnum\n");
-	else
-		printf("ft_isalnum result: is not alnum\n");
-	return 0;
+	{
+		printf("dup result:\n%s", dup);
+		free(dup);
+		return (0);
+	}
 }*/

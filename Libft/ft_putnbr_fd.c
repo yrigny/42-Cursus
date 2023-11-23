@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 17:56:27 by yrigny            #+#    #+#             */
-/*   Updated: 2023/11/06 17:56:29 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/14 15:02:07 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/14 16:18:54 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if ((c >= 48 && c <= 57) || (c > 64 && c < 91) || (c > 96 && c < 123))
-		return (1);
-	return (0);
+	if (n <= -10 || n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		if (n < 0)
+			ft_putchar_fd(-(n % 10) + '0', fd);
+		else
+			ft_putchar_fd(n % 10 + '0', fd);
+	}
+	else if (n < 0 && n > -10)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd(-n + '0', fd);
+	}
+	else
+		ft_putchar_fd(n + '0', fd);
 }
-/*
-int	main(void)
-{
-	int c = '?';
-	if (isalnum(c))
-		printf("isalnum result: is alnum\n");
-	else
-		printf("isalnum result: is not alnum\n");
-	if (ft_isalnum(c))
-		printf("ft_isalnum result: is alnum\n");
-	else
-		printf("ft_isalnum result: is not alnum\n");
-	return 0;
-}*/
