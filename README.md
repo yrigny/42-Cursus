@@ -1,1 +1,1 @@
-42 project #1 ✅ 125/125
+libft updated with get_next_line and ft_printf
