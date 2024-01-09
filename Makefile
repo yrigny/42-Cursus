@@ -37,9 +37,8 @@ CFILES = ft_isalpha.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c
-
-CFILES_B = ft_lstnew.c \
+	ft_putnbr_fd.c \
+	ft_lstnew.c \
 	ft_lstadd_front.c \
 	ft_lstsize.c \
 	ft_lstlast.c \
@@ -47,29 +46,29 @@ CFILES_B = ft_lstnew.c \
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c
+	ft_lstmap.c \
+	ft_printf.c \
+	fprinter_1.c \
+	fprinter_2.c \
+	get_next_line.c \
+	get_next_line_utils.c
 
 OFILES = $(CFILES:.c=.o)
-
-OFILES_B = $(CFILES_B:.c=.o)
 
 $(NAME): $(OFILES)
 	ar rcs $(NAME) $(OFILES)
 
 all: $(NAME)
 
-bonus: $(NAME) $(OFILES_B)
-	ar rs $(NAME) $(OFILES_B)
-
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OFILES) $(OFILES_B)
+	rm -f $(OFILES)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re

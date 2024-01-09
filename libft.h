@@ -12,12 +12,15 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdio.h>
 # include <ctype.h>
+# include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
-# include <unistd.h>
+# include <stdarg.h>
+# include <stdbool.h>
+# include <fcntl.h>
 
+/* basic */
 typedef struct s_list
 {
 	void			*content;
@@ -67,5 +70,57 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/* ft_ptintf */
+typedef struct s_flags
+{
+	bool	left;
+	bool	plus;
+	bool	space;
+	bool	hash;
+	bool	zero;
+	int		width;
+	bool	dot;
+	int		precis;
+	char	type;
+}		t_flags;
+
+int		ft_printf(const char *fstr, ...);
+int		putnchar(int n, char c);
+int		getulen(unsigned long num, unsigned int baselen);
+long	unsign(long n);
+void	printer(const char *fstr, va_list *p_args, int *p_n);
+void	fprinter(const char *fstr, va_list *p_args, int *p_n);
+void	iniflagset(t_flags *p_flagset);
+void	parseflag(t_flags *p_flagset, const char *fstr);
+void	putunbr_base(unsigned long nbr, char *base, unsigned int baselen);
+void	fprinter_c(t_flags flagset, va_list *p_args, int *p_n);
+void	fprinter_s(t_flags flagset, va_list *p_args, int *p_n);
+void	fprinter_p(t_flags flagset, va_list *p_args, int *p_n);
+void	fprinter_d(t_flags flagset, va_list *p_args, int *p_n);
+void	fprinter_u(t_flags flagset, va_list *p_args, int *p_n);
+void	fprinter_x(t_flags flags, va_list *p_args, int *p_n, char *base);
+
+/* get_next_line */
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
+
+typedef struct s_lst
+{
+	char			*content;
+	struct s_lst	*next;
+}			t_lst;
+
+char	*get_next_line(int fd);
+int		read_n_stash(int fd, ssize_t *p_bytes_read, t_lst **p_stash);
+int		count_line_len(t_lst *stash);
+int		find_endl(t_lst *stash);
+int		copy_line(t_lst *stash, char **p_line);
+void	clean_stash(t_lst **p_stash, int line_len);
+void	ft_lstdel_front(t_lst **p_lst);
+void	ft_lstadd(t_lst **lst, t_lst *new);
+void	ft_memcp(char *dest, char *src, size_t n);
+void	free_stash(t_lst **p_stash);
 
 #endif

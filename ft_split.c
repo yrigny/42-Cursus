@@ -72,18 +72,3 @@ char	**ft_split(char const *s, char c)
 	dest = copywords(wordcount, dest, s, c);
 	return (dest);
 }
-/*
-int	main()
-{
-	char	*s = " fuck the  fucking ft split  ";
-	char	c = ' ';
-	char	**dest;
-	int	i;
-
-	dest = ft_split(s, c);
-	i = -1;
-	while (++i < 5)
-		printf("%s\n", dest[i]);
-	free (dest);
-	return (0);
-}*/
