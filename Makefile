@@ -4,70 +4,46 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
 
-CFILES = ft_isalpha.c \
-	ft_isdigit.c \
-	ft_isalnum.c \
-	ft_isascii.c \
-	ft_isprint.c \
-	ft_strlen.c \
-	ft_memset.c \
-	ft_bzero.c \
-	ft_memcpy.c \
-	ft_memmove.c \
-	ft_strlcpy.c \
-	ft_strlcat.c \
-	ft_toupper.c \
-	ft_tolower.c \
-	ft_strchr.c \
-	ft_strrchr.c \
-	ft_strncmp.c \
-	ft_memchr.c \
-	ft_memcmp.c \
-	ft_strnstr.c \
-	ft_atoi.c \
-	ft_calloc.c \
-	ft_strdup.c \
-	ft_substr.c \
-	ft_strjoin.c \
-	ft_strtrim.c \
-	ft_split.c \
-	ft_itoa.c \
-	ft_strmapi.c \
-	ft_striteri.c \
-	ft_putchar_fd.c \
-	ft_putstr_fd.c \
-	ft_putendl_fd.c \
-	ft_putnbr_fd.c \
-	ft_lstnew.c \
-	ft_lstadd_front.c \
-	ft_lstsize.c \
-	ft_lstlast.c \
-	ft_lstadd_back.c \
-	ft_lstdelone.c \
-	ft_lstclear.c \
-	ft_lstiter.c \
-	ft_lstmap.c \
-	ft_printf.c \
-	fprinter_1.c \
-	fprinter_2.c \
-	get_next_line.c \
-	get_next_line_utils.c
+SRC_DIR_LIB = src/
+OBJ_DIR_LIB = obj/
 
-OFILES = $(CFILES:.c=.o)
+SRC = ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_isspace \
+	ft_strlen ft_memset ft_bzero ft_memcpy ft_memmove ft_strlcpy ft_strlcat \
+	ft_toupper ft_tolower ft_strchr ft_strrchr ft_strncmp ft_memchr ft_memcmp \
+	ft_strnstr ft_atoi ft_calloc ft_strdup ft_substr ft_strjoin ft_strtrim \
+	ft_split ft_itoa ft_strmapi ft_striteri ft_putchar_fd ft_putstr_fd \
+	ft_putendl_fd ft_putnbr_fd ft_lstnew ft_lstadd_front ft_lstsize \
+	ft_lstlast ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap \
+	ft_printf fprinter_1 fprinter_2 \
+	get_next_line get_next_line_utils
+
+CFILES = $(addprefix $(SRC_DIR_LIB), $(addsuffix .c, $(SRC)))
+OFILES = $(addprefix $(OBJ_DIR_LIB), $(addsuffix .o, $(SRC)))
+
+GREEN=\033[0;32m
+YELLOW=\033[0;33m
+BLUE=\033[0;34m
+MAGENTA=\033[0;35m
+NONE=\033[0m
 
 $(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES)
+	@ar rcs $(NAME) $(OFILES)
+	@echo "$(GREEN)Compiled ✓ $(NAME)$(NONE)"
 
 all: $(NAME)
 
-%.o: %.c libft.h
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR_LIB)%.o: $(SRC_DIR_LIB)%.c libft.h
+	@mkdir -p $(OBJ_DIR_LIB)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OFILES)
+#	rm -f $(OFILES)
+	@rm -rf $(OBJ_DIR_LIB)
+	@echo "$(MAGENTA)Cleaned object files ✓ $(NONE)"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(MAGENTA)Cleaned $(NAME) ✓ $(NONE)"
 
 re: fclean all
 
